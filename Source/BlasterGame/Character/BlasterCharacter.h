@@ -27,6 +27,7 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	
 	UPROPERTY(EditAnywhere, Category = Input)
 	UInputMappingContext* BlasterContext;
 
@@ -43,6 +44,7 @@ protected:
 	void Look(const FInputActionValue& Value);
 
 private:
+
 
 	UPROPERTY(EditDefaultsOnly, Category = Camera)
 	USpringArmComponent* CameraBoom;
