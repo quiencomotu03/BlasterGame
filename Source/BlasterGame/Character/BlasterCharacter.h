@@ -11,6 +11,7 @@ class USpringArmComponent;
 class UCameraComponent;
 class UInputAction;
 class UInputMappingContext;
+class UWidgetComponent;
 
 UCLASS()
 class BLASTERGAME_API ABlasterCharacter : public ACharacter
@@ -42,6 +43,9 @@ protected:
 
 	void Move(const FInputActionValue& Value);
 	void Look(const FInputActionValue& Value);
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UWidgetComponent* OverheadWidget;
 
 private:
 

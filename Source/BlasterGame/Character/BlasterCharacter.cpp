@@ -8,6 +8,7 @@
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Components/WidgetComponent.h"
 
 // Sets default values
 ABlasterCharacter::ABlasterCharacter()
@@ -26,6 +27,10 @@ ABlasterCharacter::ABlasterCharacter()
 
 	//bUseControllerRotation = false;
 	GetCharacterMovement()->bOrientRotationToMovement = true;
+
+
+	OverheadWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("OverheadWidget"));
+	OverheadWidget->SetupAttachment(RootComponent);
 }
 
 
