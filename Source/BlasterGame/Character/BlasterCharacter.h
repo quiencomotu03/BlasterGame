@@ -12,6 +12,7 @@ class UCameraComponent;
 class UInputAction;
 class UInputMappingContext;
 class UWidgetComponent;
+class AWeapon;
 
 UCLASS()
 class BLASTERGAME_API ABlasterCharacter : public ACharacter
@@ -23,7 +24,7 @@ public:
 	ABlasterCharacter();
 	virtual void Tick(float DeltaTime) override;
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -47,6 +48,12 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	UWidgetComponent* OverheadWidget;
 
+	UPROPERTY(ReplicatedUsing = OnRep_OverlappingWeapon)
+	AWeapon* OverlappingWeapon;
+
+	UFUNCTION()
+	void OnRep_OverlappingWeapon(AWeapon* LastWeapon);
+
 private:
 
 
@@ -59,6 +66,9 @@ private:
 
 
 public:	
-
+	//FORCEINLINE void SetOverlappingWeapon(AWeapon* Weapon) {OverlappingWeapon = Weapon;}
+	/* as soon as the value of overlapping weapon changes, then it will replicate, 
+	which means the variable will be set on all client blaster characters.*/
+	void SetOverlappingWeapon(AWeapon* Weapon);
 
 };
