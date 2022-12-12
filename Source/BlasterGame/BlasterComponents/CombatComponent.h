@@ -19,9 +19,8 @@ public:
 	UCombatComponent();
 	friend class ABlasterCharacter;
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-
 	void EquipWeapon(AWeapon* WeaponToEquip);
-
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 protected:
 
 	virtual void BeginPlay() override;
@@ -30,6 +29,12 @@ protected:
 private:
 
 	ABlasterCharacter* Character;
+
+	/* equip weapon is only sent on the server, which means we're only setting equipped 
+	weapon on the server and equipped weapon is not replicated well since our enemy 
+	instance needs to know if we have an equipped weapon so all clients can be in
+	the correct animation poses on all machines.*/
+	UPROPERTY(Replicated)
 	AWeapon* EquippedWeapon;
 
 public:	

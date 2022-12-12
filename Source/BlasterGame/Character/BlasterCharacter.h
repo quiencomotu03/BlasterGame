@@ -81,4 +81,6 @@ public:
 	which means the variable will be set on all client blaster characters.*/
 	void SetOverlappingWeapon(AWeapon* Weapon);
 
+	bool IsWeaponEquipped();
+
 };

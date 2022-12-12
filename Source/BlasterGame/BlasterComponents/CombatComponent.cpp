@@ -5,6 +5,7 @@
 #include "BlasterGame/Weapon/Weapon.h"
 #include "BlasterGame/Character/BlasterCharacter.h"
 #include "Engine/SkeletalMeshSocket.h"
+#include "Net/UnrealNetwork.h"
 #include "Components/SphereComponent.h"
 
 UCombatComponent::UCombatComponent()
@@ -47,5 +48,18 @@ void UCombatComponent::EquipWeapon(AWeapon* WeaponToEquip)
 	}
 	EquippedWeapon->SetOwner(Character);
 	
+}
+
+void UCombatComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+	DOREPLIFETIME(UCombatComponent, EquippedWeapon);
+	/*now equipped weapon is replicated which means when it changes, that change will be 
+	reflected on all clients.
+	So in Blaster anim instance, when we call is weapon equipped, we will access the 
+	Blaster character, which will then check to see if combat is valid and if combat 
+	equipped weapon is valid and return true in that case. 
+	So we now have that information on the anim instance and thus the anim blueprint.*/
 }
 
