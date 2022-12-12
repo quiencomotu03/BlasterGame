@@ -72,6 +72,9 @@ private:
 	UPROPERTY(VisibleAnywhere)
 	class UCombatComponent* Combat;
 
+	UFUNCTION(Server, Reliable)
+	void ServerEquipButtonPressed();
+
 public:	
 	//FORCEINLINE void SetOverlappingWeapon(AWeapon* Weapon) {OverlappingWeapon = Weapon;}
 	/* as soon as the value of overlapping weapon changes, then it will replicate, 
