@@ -46,6 +46,9 @@ protected:
 	UPROPERTY(EditAnywhere, Category = Input)
 	UInputAction* EquipAction;
 
+	UPROPERTY(EditAnywhere, Category = Input)
+	UInputAction* CrouchAction;
+
 	void Move(const FInputActionValue& Value);
 	void Look(const FInputActionValue& Value);
 
@@ -59,6 +62,8 @@ protected:
 	void OnRep_OverlappingWeapon(AWeapon* LastWeapon);
 
 	void EquipButtonPressed();
+
+	void CrouchButtonPressed();
 
 private:
 
