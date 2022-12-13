@@ -49,6 +49,9 @@ protected:
 	UPROPERTY(EditAnywhere, Category = Input)
 	UInputAction* CrouchAction;
 
+	UPROPERTY(EditAnywhere, Category = Input)
+	UInputAction* AimAction;
+
 	void Move(const FInputActionValue& Value);
 	void Look(const FInputActionValue& Value);
 
@@ -64,6 +67,8 @@ protected:
 	void EquipButtonPressed();
 
 	void CrouchButtonPressed();
+	void AimButtonPressed();
+	void AimButtomReleased();
 
 private:
 
@@ -80,6 +85,8 @@ private:
 	UFUNCTION(Server, Reliable)
 	void ServerEquipButtonPressed();
 
+
+
 public:	
 	//FORCEINLINE void SetOverlappingWeapon(AWeapon* Weapon) {OverlappingWeapon = Weapon;}
 	/* as soon as the value of overlapping weapon changes, then it will replicate, 
@@ -87,5 +94,7 @@ public:
 	void SetOverlappingWeapon(AWeapon* Weapon);
 
 	bool IsWeaponEquipped();
+
+	bool IsAiming();
 
 };

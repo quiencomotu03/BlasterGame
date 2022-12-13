@@ -26,6 +26,17 @@ void UCombatComponent::BeginPlay()
 	
 }
 
+void UCombatComponent::SetAiming(bool bIsAiming)
+{
+	bAiming = bIsAiming;
+	ServerSetAiming(bIsAiming);
+}
+
+void UCombatComponent::ServerSetAiming_Implementation(bool bIsAiming)
+{
+	bAiming = bIsAiming;
+}
+
 
 
 void UCombatComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
@@ -61,5 +72,7 @@ void UCombatComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Out
 	Blaster character, which will then check to see if combat is valid and if combat 
 	equipped weapon is valid and return true in that case. 
 	So we now have that information on the anim instance and thus the anim blueprint.*/
+
+	DOREPLIFETIME(UCombatComponent, bAiming);
 }
 
