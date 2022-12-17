@@ -29,6 +29,10 @@ protected:
 
 	UFUNCTION(Server, Reliable)
 	void ServerSetAiming(bool bIsAiming);
+
+	UFUNCTION()
+	void OnRep_EquippedWeapon();
+
 private:
 
 	ABlasterCharacter* Character;
@@ -37,7 +41,7 @@ private:
 	weapon on the server and equipped weapon is not replicated well since our enemy 
 	instance needs to know if we have an equipped weapon so all clients can be in
 	the correct animation poses on all machines.*/
-	UPROPERTY(Replicated)
+	UPROPERTY(ReplicatedUsing = OnRep_EquippedWeapon)
 	AWeapon* EquippedWeapon;
 
 	UPROPERTY(Replicated)
